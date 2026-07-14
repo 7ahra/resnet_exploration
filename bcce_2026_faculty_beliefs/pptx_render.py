@@ -21,8 +21,10 @@ SANS = {
  (1,1): "/usr/share/fonts/truetype/liberation/LiberationSans-BoldItalic.ttf",
 }
 _fc = {}
+SERIF_NAMES = ("georgia", "constantia", "cambria", "times", "garamond", "book antiqua", "palatino")
 def font(name, size_pt, bold, italic):
-    fam = SERIF if (name or "").lower().startswith("georgia") else SANS
+    nm = (name or "").lower()
+    fam = SERIF if any(nm.startswith(s) for s in SERIF_NAMES) else SANS
     path = fam[(1 if bold else 0, 1 if italic else 0)]
     key = (path, int(size_pt*SCALE/72))
     if key not in _fc:
